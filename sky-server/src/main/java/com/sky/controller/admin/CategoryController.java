@@ -30,6 +30,7 @@ public class CategoryController {
     @PostMapping
     @ApiOperation("新增分类")
     public Result save(@RequestBody CategoryDTO categoryDTO){
+        //todo 新增的时候 分类类型 在前端没有显示
         log.info("新增分类，参数：{}", categoryDTO);
         categoryService.save(categoryDTO);
         return Result.success();
@@ -58,6 +59,19 @@ public class CategoryController {
     public Result deleteById(Long id){
         log.info("根据id删除分类");
         categoryService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * 修改分类
+     * @param categoryDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("修改分类")
+    public Result update(@RequestBody CategoryDTO categoryDTO){
+        log.info("修改分类");
+        categoryService.update(categoryDTO);
         return Result.success();
     }
 
