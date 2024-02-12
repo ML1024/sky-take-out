@@ -57,7 +57,7 @@ public class CategoryController {
     @DeleteMapping
     @ApiOperation("根据id删除分类")
     public Result deleteById(Long id){
-        log.info("根据id删除分类");
+        log.info("根据id删除分类，参数：{}", id);
         categoryService.deleteById(id);
         return Result.success();
     }
@@ -70,8 +70,23 @@ public class CategoryController {
     @PutMapping
     @ApiOperation("修改分类")
     public Result update(@RequestBody CategoryDTO categoryDTO){
-        log.info("修改分类");
+        log.info("修改分类，参数：{}", categoryDTO);
         categoryService.update(categoryDTO);
+        return Result.success();
+    }
+
+
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用分类")
+    public Result startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("启用禁用分类，参数：{}, {}",status,id);
+        categoryService.startOrStop(status, id);
         return Result.success();
     }
 
