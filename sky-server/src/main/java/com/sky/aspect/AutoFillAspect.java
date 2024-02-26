@@ -35,7 +35,8 @@ public class AutoFillAspect {
      * 前置通知：在通知当中进行公共字段的赋值
      */
     @Before("autoFillPointCut()") //表示匹配上切入点表达式autoFillPointCut的时候，执行通知的方法
-    public void autoFill(JoinPoint joinPoint) { //参数：连接点JoinPoint。通过连接点，知道当前哪个方法被拦截到了，以及该方法的参数
+    public void autoFill(JoinPoint joinPoint) { //参数：连接点JoinPoint。
+                                                // 通过连接点，知道当前哪个方法被拦截到了，以及该方法的参数
         log.info("开始进行公共字段自动填充...");
 
         //1.获取到当前被拦截的方法的数据库操作类型

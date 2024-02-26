@@ -10,7 +10,7 @@
                 and name like concat("%", #{name}, "%")
             </if>
             <if test="type != null">
-                type = #{type}
+                and type = #{type}
             </if>
         </where>
         order by sort asc, create_time desc
@@ -28,5 +28,14 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="list" resultType="Category">
+        select * from category
+        where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort asc,create_time desc
+    </select>
 
 </mapper>
