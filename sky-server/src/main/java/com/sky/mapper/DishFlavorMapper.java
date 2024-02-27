@@ -4,6 +4,7 @@ import com.sky.annotation.AutoFill;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
 import com.sky.enumeration.OperationType;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,4 +18,13 @@ public interface DishFlavorMapper {
      * @param flavors
      */
     void insertBatch(List<DishFlavor> flavors);
+
+    /**
+     * 根据菜品id删除对应的口味数据
+     * @param dishId
+     */
+    @Delete("delete from dish_flavor where dish_id = #{dishId}")
+    //形参起什么名字都可以，我们根据菜品来删，所以起名dishId
+    //如果起名id，会让人误以为是根据主键来删
+    void deleteByDishId(Long dishId);
 }
