@@ -13,3 +13,10 @@ sky:
     access-key-secret: 3S07uQfWxxSzhtRwITMjMyccQKapTl
     bucket-name: sky-itcast-ml1024
 
+  redis:
+    host: localhost
+    port: 6379
+    password: 1024
+    database: 0
+
+
