@@ -111,6 +111,16 @@ public class DishServiceImpl implements DishService {
             //删除菜品关联的口味数据
             dishFlavorMapper.deleteByDishId(id);
         }
+        // ↑ 每次for循环遍历，都会发出2条sql
+        // 如果循环次数很多，发出的sql数量会很多，可能会引发性能上的问题
+        // 所以，可以进行优化，把sql语句的数量减少：
 
+        //根据菜品id集合批量删除菜品数据
+        //sql：delete from dish where id in (?,?,?)
+        dishMapper.deleteByIds(ids);
+
+        //根据菜品id集合批量删除关联的口味数据
+        //sql：delete from dish_flavor where dishId in (?,?,?)
+        dishFlavorMapper.deleteByDishIds(ids);
     }
 }

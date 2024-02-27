@@ -27,4 +27,10 @@ public interface DishFlavorMapper {
     //形参起什么名字都可以，我们根据菜品来删，所以起名dishId
     //如果起名id，会让人误以为是根据主键来删
     void deleteByDishId(Long dishId);
+
+    /**
+     * 根据菜品id集合批量删除关联的的口味数据
+     * @param dishIds
+     */
+    void deleteByDishIds(List<Long> dishIds);
 }
