@@ -34,7 +34,6 @@ public class CategoryController {
     @PostMapping
     @ApiOperation("新增分类")
     public Result save(@RequestBody CategoryDTO categoryDTO){
-        //todo 新增的时候 分类类型 在前端没有显示
         log.info("新增分类，参数：{}", categoryDTO);
         categoryService.save(categoryDTO);
         return Result.success();
