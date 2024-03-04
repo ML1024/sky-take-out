@@ -39,20 +39,22 @@ public class DishController {
         String key = "dish_" + categoryId;
 
         //查询redis中是否存在菜品数据
-        Object o = redisTemplate.opsForValue().get(key);//放进去是
-
-
-        //如果存在，直接返回，无序查询数据库
-
-        //如果不存在，查询数据库，将查询到的数据放入redis
+            //放进去是什么类型，取出来就是什么类型
+            //这里放进去的List<DishVO>集合，所以取出来是List<DishVO>
+        List<DishVO> list = (List<DishVO>) redisTemplate.opsForValue().get(key);
+        if (list != null && list.size() > 0){
+            //如果存在，直接返回，无序查询数据库
+            return Result.success(list);
+        }
 
         Dish dish = new Dish();
         dish.setCategoryId(categoryId);
         dish.setStatus(StatusConstant.ENABLE);//查询起售中的菜品
 
-        List<DishVO> list = dishService.listWithFlavor(dish);
+        //如果不存在，查询数据库，将查询到的数据放入redis中
+        list = dishService.listWithFlavor(dish);
+        redisTemplate.opsForValue().set(key, list);
 
         return Result.success(list);
     }
-
 }
