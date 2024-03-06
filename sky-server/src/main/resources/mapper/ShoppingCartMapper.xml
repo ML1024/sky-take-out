@@ -6,7 +6,7 @@
     <select id="list" resultType="com.sky.entity.ShoppingCart">
         select * from shopping_cart
         <where>
-            <if test="user_id != null">
+            <if test="userId != null">
                 and user_id = #{userId}
             </if>
             <if test="setmealId != null">
