@@ -41,9 +41,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
 
-        //如果已经存在了，只需要将数量加一
         if (list != null && list.size() > 0) {
-            ShoppingCart cart = list.get(0);//list中只可能有两种结果：查到1条数据 或 查不到数据
+            //如果已经存在了，只需要将数量加一
+            ShoppingCart cart = list.get(0);//list中只可能有两种结果：查到1条数据/查不到数据
             cart.setNumber(cart.getNumber() + 1);
             shoppingCartMapper.updateNumberById(cart);
         } else {
@@ -57,7 +57,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 shoppingCart.setName(dish.getName());
                 shoppingCart.setImage(dish.getImage());
                 shoppingCart.setAmount(dish.getPrice());
-
             } else {
                 //本次添加到购物车的是套餐
                 Long setmealId = shoppingCartDTO.getSetmealId();
@@ -71,7 +70,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCart.setNumber(1);
             shoppingCart.setCreateTime(LocalDateTime.now());
             shoppingCartMapper.insert(shoppingCart);
-
         }
 
 
